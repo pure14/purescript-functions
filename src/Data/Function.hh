@@ -17,67 +17,216 @@
 
 #include "PureScript/PureScript.hh"
 
+//-----------------------------------------------------------------------------
+// NOTE: These are not really useful for the C++ backend, so they are
+//       currently just pass-throughs.
+//-----------------------------------------------------------------------------
+
 namespace Data_Function {
   using namespace PureScript;
 
-  template <typename A>
-  using Fn0 = std::function<A(Prelude::Unit)>;
+  //---------------------------------------------------------------------------
 
-  template <typename A, typename B>
-  using Fn1 = std::function<B(A)>;
+  inline auto mkFn0(const any& fn) -> any {
+    return fn;
+  }
 
-  template <typename A, typename B, typename C>
-  using Fn2 = std::function<C(A,B)>;
+  inline auto mkFn1(const any& fn) -> any {
+    return fn;
+  }
 
+  inline auto mkFn2(const any& fn) -> any {
+    return fn;
+  }
 
-  //  foreign import mkFn0 :: forall a. (Unit -> a) -> Fn0 a
-  template <typename A>
-  inline auto mkFn0(const fn<Prelude::Unit, A>& f) {
-    return [=](Prelude::Unit) -> A {
-      return f(Prelude::unit);
+  inline auto mkFn3(const any& fn) -> any {
+    return fn;
+  }
+
+  inline auto mkFn4(const any& fn) -> any {
+    return fn;
+  }
+
+  inline auto mkFn5(const any& fn) -> any {
+    return fn;
+  }
+
+  inline auto mkFn6(const any& fn) -> any {
+    return fn;
+  }
+
+  inline auto mkFn7(const any& fn) -> any {
+    return fn;
+  }
+
+  inline auto mkFn8(const any& fn) -> any {
+    return fn;
+  }
+
+  inline auto mkFn9(const any& fn) -> any {
+    return fn;
+  }
+
+  inline auto mkFn10(const any& fn) -> any {
+    return fn;
+  }
+
+  //---------------------------------------------------------------------------
+
+  inline auto runFn0(const any& fn) -> any {
+    return fn();
+  }
+
+  inline auto runFn1(const any& fn) -> any {
+    return [=](const any& a) -> any {
+      return fn(a);
     };
   }
 
-  // foreign import mkFn1 :: forall a b. (a -> b) -> Fn1 a b
-  template <typename A, typename B>
-  inline auto mkFn1(const fn<A,B>& f) {
-    return [=](A a) -> B {
-      return f(a);
-    };
-  }
-
-  template <typename A, typename B, typename C>
-  inline auto mkFn2(const fn<A,fn<B,C>>& f) {
-    return [=](A a, B b) -> C {
-      return f(a)(b);
-    };
-  }
-
-
-  // foreign import runFn0 :: forall a. Fn0 a -> a
-  template <typename A>
-  inline auto runFn0(const Fn0<A>& f) {
-    return f(Prelude::unit);
-  }
-
-  // foreign import runFn1 :: forall a b. Fn1 a b -> a -> b
-  template <typename A, typename B>
-  inline auto runFn1(const Fn1<A,B>& f) {
-    return [=](A a) {
-      return f(a);
-    };
-  }
-
-  // foreign import runFn2 :: forall a b c. Fn2 a b c -> a -> b -> c
-  template <typename A, typename B, typename C>
-  inline auto runFn2(const Fn2<A,B,C>& f) {
-    return [=](A a) {
-      return [=](B b) {
-        return f(a, b);
+  inline auto runFn2(const any& fn) -> any {
+    return [=](const any& a) -> any {
+      return [=](const any& b) -> any {
+        return fn(a)(b);
       };
     };
   }
 
-}
+  inline auto runFn3(const any& fn) -> any {
+    return [=](const any& a) -> any {
+      return [=](const any& b) -> any {
+        return [=](const any& c) -> any {
+          return fn(a)(b)(c);
+        };
+      };
+    };
+  }
+
+  inline auto runFn4(const any& fn) -> any {
+    return [=](const any& a) -> any {
+      return [=](const any& b) -> any {
+        return [=](const any& c) -> any {
+          return [=](const any& d) -> any {
+            return fn(a)(b)(c)(d);
+          };
+        };
+      };
+    };
+  }
+
+  inline auto runFn5(const any& fn) -> any {
+    return [=](const any& a) -> any {
+      return [=](const any& b) -> any {
+        return [=](const any& c) -> any {
+          return [=](const any& d) -> any {
+            return [=](const any& e) -> any {
+              return fn(a)(b)(c)(d)(e);
+            };
+          };
+        };
+      };
+    };
+  }
+
+  inline auto runFn6(const any& fn) -> any {
+    return [=](const any& a) -> any {
+      return [=](const any& b) -> any {
+        return [=](const any& c) -> any {
+          return [=](const any& d) -> any {
+            return [=](const any& e) -> any {
+              return [=](const any& f) -> any {
+                return fn(a)(b)(c)(d)(e)(f);
+              };
+            };
+          };
+        };
+      };
+    };
+  }
+
+  inline auto runFn7(const any& fn) -> any {
+    return [=](const any& a) -> any {
+      return [=](const any& b) -> any {
+        return [=](const any& c) -> any {
+          return [=](const any& d) -> any {
+            return [=](const any& e) -> any {
+              return [=](const any& f) -> any {
+                return [=](const any& g) -> any {
+                  return fn(a)(b)(c)(d)(e)(f)(g);
+                };
+              };
+            };
+          };
+        };
+      };
+    };
+  }
+
+  inline auto runFn8(const any& fn) -> any {
+    return [=](const any& a) -> any {
+      return [=](const any& b) -> any {
+        return [=](const any& c) -> any {
+          return [=](const any& d) -> any {
+            return [=](const any& e) -> any {
+              return [=](const any& f) -> any {
+                return [=](const any& g) -> any {
+                  return [=](const any& h) -> any {
+                    return fn(a)(b)(c)(d)(e)(f)(g)(h);
+                  };
+                };
+              };
+            };
+          };
+        };
+      };
+    };
+  }
+
+  inline auto runFn9(const any& fn) -> any {
+    return [=](const any& a) -> any {
+      return [=](const any& b) -> any {
+        return [=](const any& c) -> any {
+          return [=](const any& d) -> any {
+            return [=](const any& e) -> any {
+              return [=](const any& f) -> any {
+                return [=](const any& g) -> any {
+                  return [=](const any& h) -> any {
+                    return [=](const any& i) -> any {
+                      return fn(a)(b)(c)(d)(e)(f)(g)(h)(i);
+                    };
+                  };
+                };
+              };
+            };
+          };
+        };
+      };
+    };
+  }
+
+  inline auto runFn10(const any& fn) -> any {
+    return [=](const any& a) -> any {
+      return [=](const any& b) -> any {
+        return [=](const any& c) -> any {
+          return [=](const any& d) -> any {
+            return [=](const any& e) -> any {
+              return [=](const any& f) -> any {
+                return [=](const any& g) -> any {
+                  return [=](const any& h) -> any {
+                    return [=](const any& i) -> any {
+                      return [=](const any& j) -> any {
+                        return fn(a)(b)(c)(d)(e)(f)(g)(h)(i)(j);
+                      };
+                    };
+                  };
+                };
+              };
+            };
+          };
+        };
+      };
+    };
+  }
+
+} // namespace Data_Function
 
 #endif // Data_Function_FFI_HH
